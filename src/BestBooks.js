@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+import Carousel from 'react-bootstrap/Carousel';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -13,11 +16,12 @@ class BestBooks extends React.Component {
 getBooks = async () => {
   try {
 
-    let url = ``
+    let url = `${process.env.REACT_APP_SERVER}/books`
 
     let bookData = await axios.get(url);
 
     this.setState({
+      books: bookData.data
       
     })
 
@@ -28,6 +32,9 @@ getBooks = async () => {
   }
 }
 
+componentDidMount() {
+  this.getBooks();
+}
   render() {
 
     /* TODO: render all the books in a Carousel */
@@ -37,7 +44,9 @@ getBooks = async () => {
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length ? (
-          <p>Book Carousel coming soon</p>
+          <Carousel>
+            
+          </Carousel>
         ) : (
           <h3>No Books Found :(</h3>
         )}
