@@ -15,9 +15,15 @@ getBooks = async () => {
 
     let url = ``
 
-    let bookData = await axios.get();
+    let bookData = await axios.get(url);
 
-  
+    this.setState({
+      
+    })
+
+  } catch (error) {
+    console.log(error.response)
+  }
 
   }
 }
