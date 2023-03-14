@@ -10,6 +10,18 @@ class BestBooks extends React.Component {
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
+getBooks = async () => {
+  try {
+
+    let url = ``
+
+    let bookData = await axios.get();
+
+  
+
+  }
+}
+
   render() {
 
     /* TODO: render all the books in a Carousel */
