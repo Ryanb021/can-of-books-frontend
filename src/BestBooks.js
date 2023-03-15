@@ -3,6 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Button } from 'react-bootstrap';
 import BookFormModal from './BookFormModal';
+import BookUpdateModal from './BookUpdateModal';
 
 
 class BestBooks extends React.Component {
@@ -10,6 +11,8 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: []
+      showUpdateModal: false,
+      selectedBook: {}
     }
   }
 
@@ -33,6 +36,7 @@ class BestBooks extends React.Component {
 
   }
 
+
   deleteBooks = async (id) => {
     try {
       let url = `${process.env.REACT_APP_SERVER}/books/${id}`;
@@ -45,14 +49,134 @@ class BestBooks extends React.Component {
         books: updatedBooks
       });
 
+
     } catch (error) {
       console.log(error.message)
     }
   }
 
+  handleUpdateBooks = async (bookUpdate) => {
+    try {
+      // this.props.handleOpenModal();
+      let url = `${process.env.REACT_APP_SERVER}/books/${bookUpdate._id}`
+      console.log('book update >>>>', bookUpdate)
+      console.log('URL >>>', url)
+      let updatedBook = await axios.put(url, bookUpdate);
+      console.log('updatedBook.data >>>>>', updatedBook.data)
+      let updatedArr = this.state.books.map(existingBook => {
+        return existingBook._id === bookUpdate._id
+          ? updatedBook.data
+          : existingBook
+      });
+      console.log('Updated Arrays>>>', updatedArr)
+      this.setState({
+        books: updatedArr
+      })
+
+
+    } catch (error) {
+      console.log(error.message)
+    }
+
+    } catch (error) {
+      console.log(error.message)
+    }
+
+  }
+
   handleSyncBooks = (sync) => {
     this.setState({
       books: sync
+testbranch
+    })
+
+  }
+
+
+  componentDidMount() {
+    this.getBooks();
+  }
+
+  handleBook = () => {
+    this.props.handleOpenModal();
+  }
+
+  handleBook = () => {
+    this.props.handleOpenModal();
+  }
+
+  handleUpdateModal = (book) => {
+    this.setState({
+      showUpdateModal: true,
+      selectedBook: book
+    })
+  }
+
+  closeUpdateModal = () => {
+    this.setState({
+      showUpdateModal: false
+    })
+  }
+
+  render() {
+    // * TODO: render all the books in a Carousel
+
+    return (
+        <>
+        <h2>My Essential Lifelong Learn &amp; Formation Shelf</h2>
+
+        {this.state.books.length ? (
+          <>
+            <Carousel fade variant="dark" slide={false}>
+              {this.state.book.map((book, i_id) => {
+
+                return (
+
+                  <Carousel.item key={i._id}>
+                    <img
+                      src=''
+                      alt={i.title}
+                    />
+                    <Carousel.Caption>
+                      <Button type='submit' variant="outline-dark" onClick={() =>
+                        this.deleteBooks(i_id)}>Delete This Book</Button>
+                      <Button onClick={() => { this.handleUpdateModal(book) }}>Update</Button>
+
+                      <h3>{i.title}</h3>
+                      <p>{i.description}</p>
+                      <p>Status: {i.status ? 'Available' : 'Not Available'}</p>
+                    </Carousel.Caption>
+
+                  </Carousel.item>
+                )
+              })}
+
+              </Carousel>
+
+              <BookUpdateModal>
+                handleCloseModal={this.closeUpdateModal}
+                showModal={this.state.showUpdateModal}
+                book={this.state.selectedBook}
+                handleUpdateBooks={this.handleUpdateBooks}
+              </BookUpdateModal>
+            </>
+
+            ): (
+            <h3>No Books Found :</h3>
+            )
+  }
+
+            <Button onClick={this.handleBook}>Add Book</Button>
+            <BookFormModal
+              handleCloseModal={this.props.handleCloseModal}
+              showModal={this.state.books}
+              handleSyncBooks={this.handleSyncBooks}
+            />
+          </>
+
+        )
+}
+
     }
 
     )
@@ -135,4 +259,4 @@ class BestBooks extends React.Component {
 
 
 
-export default BestBooks;
+        export default BestBooks;

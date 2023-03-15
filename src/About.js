@@ -5,6 +5,15 @@ class Profile extends Component {
   render() {
     /* TODO: render information about the developers */
     return 
+    <>
+    <p>Name: Zachariah Jeter</p>
+        <p>Title: Full Stack Developer</p>
+        <p>Location: Seattle, WA</p>
+        
+        <p>Name: Ryan Bagan</p>
+        <p>Title: Full Stack Developer</p>
+        <p>Location: Seattle, WA</p>
+    </>
   }
 };
 
