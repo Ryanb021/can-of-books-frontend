@@ -8,6 +8,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import About from './About.js'
 
 class App extends React.Component {
   render() {
@@ -18,7 +19,11 @@ class App extends React.Component {
           <Routes>
             <Route 
               exact path="/"
-              element={<BestBooks />}
+              element={<BestBooks
+                handleOpenModal={this.handleOpenModal}
+                      showModal={this.state.showModal}
+                      handleCloseModal={this.handleCloseModal}
+                />}
             >
             </Route>
         
