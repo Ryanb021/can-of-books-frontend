@@ -25,14 +25,13 @@ class BestBooks extends React.Component {
       this.setState({
         books: bookData.data
 
-      })
+      });
 
     } catch (error) {
       console.log(error.response)
     }
 
   }
-}
 
 deleteBooks = async (singleBook) => {
   try {
@@ -81,8 +80,8 @@ render() {
             <h3>{i.title}</h3>
             <p>{i.description}</p>
             <p>Status: {i.status ? 'Available' : 'Not Available'}</p>
-            <button type='submit' variant="outline-dark" onClick={() =>
-              this.deleteBooks(i_id)}>Delete This Book</button>
+            <Button type='submit' variant="outline-dark" onClick={() =>
+              this.deleteBooks(i_id)}>Delete This Book</Button>
 
           </Carousel.Caption>
 
@@ -131,6 +130,7 @@ render() {
     </>
   
   )
+}
 }
 
 
