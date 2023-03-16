@@ -4,6 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { Button } from 'react-bootstrap';
 import BookFormModal from './BookFormModal';
 import BookUpdateModal from './BookUpdateModal';
+import './BestBooks.css';
 
 
 class BestBooks extends React.Component {
