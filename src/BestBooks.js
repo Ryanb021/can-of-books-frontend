@@ -10,9 +10,105 @@ class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      noBooks: true,
+      showForm: false,
       showUpdateModal: false,
       selectedBook: {}
+    }
+  }
+
+  updateOpenFormModal = (event) => {
+    event.preventDefault();
+    this.setState({
+      showUpdateModal: true,
+    })
+  }
+
+  updateCloseFormModal = (event) => {
+    this.setState({
+      showUpdateModal: false,
+    })
+  }
+
+  openFormModal = (event) => {
+    event.preventDefault();
+    this.setState({
+      showForm: true,
+    })
+  }
+
+  closeFormModal = (event) => {
+    this.setState({
+      showForm: false,
+    })
+  }
+
+  bookSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.title.value);
+    console.log(event.target.description.value);
+    console.log(event.target.status.checked);
+    let newBook = {
+      title: event.target.title.value,
+      description: event.target.description.value,
+      status: event.target.value.checked,
+    }
+    this.setState({
+      showForm: false,
+    })
+    this.postBook(newBook);
+  }
+  // Create Book function
+  postBook = async (newBook) => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books`;
+      let createdBook = await axios.post(url, newBook);
+      console.log(createdBook.data);
+      this.setState({
+        books: [...this.state.books, createdBook.data]
+      })
+    } catch (error) {
+      console.log('error msg: ', error.response.data)
+    }
+  }
+
+  // Delet Book function
+  deleteBook = async (id) => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${id}`;
+      await axios.delete(url);
+      let updatedBooks = this.state.books.filter(book => book._id !== id);
+      this.setState({
+        books: updatedBooks
+      });
+    } catch (error) {
+      console.log('error msg: ', error.response.data)
+    }
+  }
+
+  openUpdateModal = (i) => {
+    this.setState({
+      showUpdateModal: true,
+      selectedBook: i,
+    })
+  }
+
+  updatedBook = async (book) => {
+    try {
+      let updatedBookDataBase = await axios.put(`${process.env.REACT_APP_SERVER}/books/${book._id}`);
+      let updatedMoreBooks = this.state.books.map(i => {
+        return i._id === book._id
+          ? updatedBookDataBase.data
+          : i;
+      });
+      this.setState({
+        showUpdateModal: false,
+        books: updatedMoreBooks,
+      })
+
+    } catch (error) {
+      console.log('error message:', error.response.data)
     }
   }
 
@@ -21,174 +117,25 @@ class BestBooks extends React.Component {
   getBooks = async () => {
     try {
 
-      let url = `${process.env.REACT_APP_SERVER}/books`
+      let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
 
-      let bookData = await axios.get(url);
-
-      this.setState({
-        books: bookData.data
-
-      });
-
-    } catch (error) {
-      console.log(error.response)
-    }
-
-  }
-
-
-  deleteBooks = async (id) => {
-    try {
-      let url = `${process.env.REACT_APP_SERVER}/books/${id}`;
-
-      await axios.delete(url);
-
-      let updatedBooks = this.state.books.filter(book => book._id !== id);
+      //let bookData = await axios.get(url);
 
       this.setState({
-        books: updatedBooks
-      });
+        books: results.data,
+        noBooks: false,
 
-
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-
-  handleUpdateBooks = async (bookUpdate) => {
-    try {
-      // this.props.handleOpenModal();
-      let url = `${process.env.REACT_APP_SERVER}/books/${bookUpdate._id}`
-      console.log('book update >>>>', bookUpdate)
-      console.log('URL >>>', url)
-      let updatedBook = await axios.put(url, bookUpdate);
-      console.log('updatedBook.data >>>>>', updatedBook.data)
-      let updatedArr = this.state.books.map(existingBook => {
-        return existingBook._id === bookUpdate._id
-          ? updatedBook.data
-          : existingBook
-      });
-      console.log('Updated Arrays>>>', updatedArr)
-      this.setState({
-        books: updatedArr
       })
 
-
     } catch (error) {
-      console.log(error.message)
-    }
-
-    } catch (error) {
-      console.log(error.message)
+      console.log('Ha! Ha! Ha! You Suck!', error.response.data)
     }
 
   }
-
-  handleSyncBooks = (sync) => {
-    this.setState({
-      books: sync
-testbranch
-    })
-
-  }
-
 
   componentDidMount() {
     this.getBooks();
   }
-
-  handleBook = () => {
-    this.props.handleOpenModal();
-  }
-
-  handleBook = () => {
-    this.props.handleOpenModal();
-  }
-
-  handleUpdateModal = (book) => {
-    this.setState({
-      showUpdateModal: true,
-      selectedBook: book
-    })
-  }
-
-  closeUpdateModal = () => {
-    this.setState({
-      showUpdateModal: false
-    })
-  }
-
-  render() {
-    // * TODO: render all the books in a Carousel
-
-    return (
-        <>
-        <h2>My Essential Lifelong Learn &amp; Formation Shelf</h2>
-
-        {this.state.books.length ? (
-          <>
-            <Carousel fade variant="dark" slide={false}>
-              {this.state.book.map((book, i_id) => {
-
-                return (
-
-                  <Carousel.item key={i._id}>
-                    <img
-                      src=''
-                      alt={i.title}
-                    />
-                    <Carousel.Caption>
-                      <Button type='submit' variant="outline-dark" onClick={() =>
-                        this.deleteBooks(i_id)}>Delete This Book</Button>
-                      <Button onClick={() => { this.handleUpdateModal(book) }}>Update</Button>
-
-                      <h3>{i.title}</h3>
-                      <p>{i.description}</p>
-                      <p>Status: {i.status ? 'Available' : 'Not Available'}</p>
-                    </Carousel.Caption>
-
-                  </Carousel.item>
-                )
-              })}
-
-              </Carousel>
-
-              <BookUpdateModal>
-                handleCloseModal={this.closeUpdateModal}
-                showModal={this.state.showUpdateModal}
-                book={this.state.selectedBook}
-                handleUpdateBooks={this.handleUpdateBooks}
-              </BookUpdateModal>
-            </>
-
-            ): (
-            <h3>No Books Found :</h3>
-            )
-  }
-
-            <Button onClick={this.handleBook}>Add Book</Button>
-            <BookFormModal
-              handleCloseModal={this.props.handleCloseModal}
-              showModal={this.state.books}
-              handleSyncBooks={this.handleSyncBooks}
-            />
-          </>
-
-        )
-}
-
-    }
-
-    )
-  }
-  componentDidMount() {
-    this.getBooks();
-  }
-
-  handleBook = () => {
-    this.props.handleOpenModal();
-  }
-
 
   render() {
     /* TODO: render all the books in a Carousel */
@@ -203,7 +150,7 @@ testbranch
             <Carousel.Caption>
               <h3>{i.title}</h3>
               <p>{i.description}</p>
-              <p>Status: {i.status ? 'Available' : 'Not Available'}</p>
+              <p>Status: {i.status ? 'Available' : 'Not Available? You must be joking!'}</p>
               <Button type='submit' variant="outline-dark" onClick={() =>
                 this.deleteBooks(i._id)}>Delete This Book</Button>
 
@@ -216,47 +163,40 @@ testbranch
 
     return (
       <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
+        <h2>Gotham's Popular Books</h2>
         {this.state.books.length ? (
           <Carousel fade variant="dark">
             {booksCarousel}
           </Carousel>
-          //   <Carousel>
-          //     {this.state.books.map((book, idx) => {
-          //       return (
 
-          //         <Carousel.Item key={idx}>
-          //           <Button onClick={() => { }}>Delete</Button>
-          //           <img
+        )
+          : (
+            <h3>What are you looking for? There is nothing here.</h3>
+          )}
 
-          //           />
-          //           <Carousel.Caption>
-          //             <h3>{book.title}</h3>
-          //             <p></p>
-          //           </Carousel.Caption>
-          //         </Carousel.Item>
-          //       )
-          //     })}
-
-
-          //   </Carousel>
-        ) : (
-          <h3>No Books Found :</h3>
-        )}
-
-        <Button onClick={this.handleBook}>Add Book</Button>
-        <BookFormModal
-          handleCloseModal={this.props.handleCloseModal}
-          showModal={this.state.books}
-          handleSyncBooks={this.handleSyncBooks}
-        />
+        <Button variant="outline-success" onClick={this.openFormModal}>Add your favorite book</Button>
+        {this.state.showForm ?
+          <BookFormModal
+            bookSubmit={this.bookSubmit}
+            closeFormModal={this.closeFormModal}
+            openFormModal={this.openFormModal}
+          /> :
+          <></>
+        }
+        {this.state.showUpdateModal ?
+        <BookUpdateModal
+        updatedBook={this.updatedBook}
+        book={this.state.selectedBook}
+        updateOpenFormModal={this.state.updateOpenFormModal}
+        updateCloseFormModal={this.state.updateCloseFormModal}
+        /> :
+        <></>
+    }
       </>
-
     )
   }
 }
 
+export default BestBooks;
 
-
-        export default BestBooks;
+  
