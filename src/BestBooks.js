@@ -48,10 +48,12 @@ class BestBooks extends React.Component {
   bookSubmit = (event) => {
     event.preventDefault();
     console.log(event.target.title.value);
+    //console.log(event.target.img.value);
     console.log(event.target.description.value);
     console.log(event.target.status.checked);
     let newBook = {
       title: event.target.title.value,
+      //img: event.target.img.value,
       description: event.target.description.value,
       status: event.target.value.checked,
     }
@@ -145,15 +147,16 @@ class BestBooks extends React.Component {
         return (
           <Carousel.Item key={i._id}>
             <img
-              src=''
+              src='https://w0.peakpx.com/wallpaper/113/52/HD-wallpaper-the-dark-knight-rises.jpg'
               alt={i.title}
             />
             <Carousel.Caption>
               <h3>{i.title}</h3>
               <p>{i.description}</p>
               <p>Status: {i.status ? 'Available' : 'Not Available? You must be joking!'}</p>
-              <Button type='submit' variant="outline-dark" onClick={() =>
+              <Button variant="outline-dark" onClick={() =>
                 this.deleteBooks(i._id)}>Delete This Book</Button>
+              <Button variant="outline-warning" onClick={() => this.openUpdateModal(i)}>Update Book Information</Button>
 
             </Carousel.Caption>
 
