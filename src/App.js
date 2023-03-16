@@ -11,7 +11,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import About from './About.js'
 
 class App extends React.Component {
   render() {
@@ -23,15 +22,12 @@ class App extends React.Component {
             <Route
               exact path="/"
               element={<BestBooks
-                handleOpenModal={this.handleOpenModal}
-                      showModal={this.state.showModal}
-                      handleCloseModal={this.handleCloseModal}
-                />}
+              />}
             >
             </Route>
             {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
-            <Route exact path ="/about"
-            element={<About />}
+            <Route exact path="/about"
+              element={<About />}
             >
 
             </Route>
@@ -44,3 +40,6 @@ class App extends React.Component {
 }
 
 export default App;
+//handleOpenModal={this.handleOpenModal}
+//showModal={this.state.showModal}
+//handleCloseModal={this.handleCloseModal}
