@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import BookFormModal from './BookFormModal';
 import BookUpdateModal from './BookUpdateModal';
 import './BestBooks.css';
@@ -48,12 +48,12 @@ class BestBooks extends React.Component {
   bookSubmit = (event) => {
     event.preventDefault();
     console.log(event.target.title.value);
-    //console.log(event.target.img.value);
+    console.log(event.target.img.value);
     console.log(event.target.description.value);
     console.log(event.target.status.checked);
     let newBook = {
       title: event.target.title.value,
-      //img: event.target.img.value,
+      img: event.target.img.value,
       description: event.target.description.value,
       status: event.target.value.checked,
     }
@@ -141,61 +141,71 @@ class BestBooks extends React.Component {
   }
 
   render() {
-    /* TODO: render all the books in a Carousel */
-    let booksCarousel = this.state.books.map(
+    // /* TODO: render all the books in a Carousel */
+   let booksCarousel = this.state.books.map(
       i => {
+
         return (
           <Carousel.Item key={i._id}>
-            <img
-              src='https://w0.peakpx.com/wallpaper/113/52/HD-wallpaper-the-dark-knight-rises.jpg'
-              alt={i.title}
-            />
-            <Carousel.Caption>
-              <h3>{i.title}</h3>
-              <p>{i.description}</p>
-              <p>Status: {i.status ? 'Available' : 'Not Available? You must be joking!'}</p>
-              <Button variant="outline-dark" onClick={() =>
-                this.deleteBooks(i._id)}>Delete This Book</Button>
-              <Button variant="outline-warning" onClick={() => this.openUpdateModal(i)}>Update Book Information</Button>
+            <Container>
+              <img
+                src='https://w0.peakpx.com/wallpaper/113/52/HD-wallpaper-the-dark-knight-rises.jpg'
+                alt={i.title}
+              />
+            </Container>
+            <Container className="caption">
+              <Carousel.Caption className="title">
+                <h3>{i.title}</h3>
+                <p className="description">{i.description}</p>
+                
+                <Button className="delete" variant="outline-dark" onClick={() =>
+                  this.deleteBooks(i._id)}>Delete This Book</Button>
+                <Button className="update" variant="outline-warning" onClick={() => this.openUpdateModal(i)}>Update Book Information</Button>
 
-            </Carousel.Caption>
-
-          </Carousel.Item>
+              </Carousel.Caption>
+            </Container>
+          </Carousel.Item >
+          
+          
         )
       }
-    );
+   );
 
     return (
       <>
-        <h2>Gotham's Popular Books</h2>
-        {this.state.books.length ? (
-          <Carousel fade variant="dark">
-            {booksCarousel}
-          </Carousel>
+        <h2 className="gotham">Gotham City's Popular Books</h2>
+        {
+          this.state.books.length ? (
+            <Carousel fade variant="dark">
+              {booksCarousel}
+            </Carousel>
 
-        )
-          : (
-            <h3>What are you looking for? There is nothing here.</h3>
-          )}
-
-        <Button variant="outline-success" onClick={this.openFormModal}>Add your favorite book</Button>
-        {this.state.showForm ?
-          <BookFormModal
-            bookSubmit={this.bookSubmit}
-            closeFormModal={this.closeFormModal}
-            openFormModal={this.openFormModal}
-          /> :
-          <></>
+          )
+            : (
+              <h3>What are you looking for? There is nothing here.</h3>
+            )
         }
-        {this.state.showUpdateModal ?
-        <BookUpdateModal
-        updatedBook={this.updatedBook}
-        book={this.state.selectedBook}
-        updateOpenFormModal={this.state.updateOpenFormModal}
-        updateCloseFormModal={this.state.updateCloseFormModal}
-        /> :
-        <></>
-    }
+
+        <Button className="add" variant="outline-success" onClick={this.openFormModal}>Add your favorite book</Button>
+        {
+          this.state.showForm ?
+            <BookFormModal
+              bookSubmit={this.bookSubmit}
+              closeFormModal={this.closeFormModal}
+              openFormModal={this.openFormModal}
+            /> :
+            <></>
+        }
+        {
+          this.state.showUpdateModal ?
+            <BookUpdateModal
+              updatedBook={this.updatedBook}
+              book={this.state.selectedBook}
+              updateOpenFormModal={this.updateOpenFormModal}
+              updateCloseFormModal={this.updateCloseFormModal}
+            /> :
+            <></>
+        }
       </>
     )
   }
@@ -203,4 +213,4 @@ class BestBooks extends React.Component {
 
 export default BestBooks;
 
-  
+//<p>Status: {i.status ? 'Available' : 'Not Available? You must be joking!'}</p>

@@ -10,16 +10,75 @@ h2 {
   font-size: 500px;
 }
 
-.btn{
+h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  font-size: 3rem;
+}
+
+.description {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.btn {
   margin-top: 30px;
   margin-bottom: 30px;
+  text-align: center;
+  margin: auto;
+  display: block;
 }
+
+.delete{
+  margin-bottom: 10px;
+}
+
 .carousel-caption {
-background-color: rgba(250, 239, 193, 0.8);
+  background-color: rgba(250, 239, 193, 0.8);
 }
 
 .carousel-inner {
   /* align-items: center; */
   text-align: center;
   object-fit: fill;
+}
+
+img {
+  border-radius: 15px;
+  opacity: 0.7;
+}
+
+img:hover {
+  opacity: 1;
+}
+
+.gotham {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 3rem;
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 151px #0fa;
+}
+
+.caption {
+  margin-top: 320px;
+}
+
+.title {
+  border-radius: 20px;
+}
+
+.add {
+  margin-bottom: 30px;
 }

@@ -22,16 +22,17 @@ class BookUpdateModal extends React.Component {
     }
 
     this.props.updatedBook(bookUpdate);
-    console.log('testing props 2 >>>>', this.props.book)
+    //console.log('testing props 2 >>>>', this.props.book)
 
     // this.postBooks(newBook);
     //this.props.handleCloseModal();
   }
 
   render() {
-    console.log(this.props.book.title);
+    //console.log(this.props.book.title);
     return (
       <>
+
       <Modal show={this.props.updateOpenFormModal} onHide={this.props.updateCloseFormModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add your favorite book</Modal.Title>
@@ -57,7 +58,9 @@ class BookUpdateModal extends React.Component {
        
 
       </Modal>
-      </>)
+
+      </>
+      );
   }
 }
 
