@@ -48,12 +48,12 @@ class BestBooks extends React.Component {
   bookSubmit = (event) => {
     event.preventDefault();
     console.log(event.target.title.value);
-    console.log(event.target.img.value);
+    console.log(event.target.image_url.value);
     console.log(event.target.description.value);
     console.log(event.target.status.checked);
     let newBook = {
       title: event.target.title.value,
-      img: event.target.img.value,
+      image_url: event.target.image_url.value,
       description: event.target.description.value,
       status: event.target.value.checked,
     }
@@ -142,22 +142,23 @@ class BestBooks extends React.Component {
 
   render() {
     // /* TODO: render all the books in a Carousel */
-   let booksCarousel = this.state.books.map(
+    let booksCarousel = this.state.books.map(
       i => {
 
         return (
           <Carousel.Item key={i._id}>
-            <Container>
+           <span>
               <img
                 src='https://w0.peakpx.com/wallpaper/113/52/HD-wallpaper-the-dark-knight-rises.jpg'
                 alt={i.title}
               />
-            </Container>
+            </span>
+
             <Container className="caption">
               <Carousel.Caption className="title">
                 <h3>{i.title}</h3>
                 <p className="description">{i.description}</p>
-                
+
                 <Button className="delete" variant="outline-dark" onClick={() =>
                   this.deleteBooks(i._id)}>Delete This Book</Button>
                 <Button className="update" variant="outline-warning" onClick={() => this.openUpdateModal(i)}>Update Book Information</Button>
@@ -165,11 +166,11 @@ class BestBooks extends React.Component {
               </Carousel.Caption>
             </Container>
           </Carousel.Item >
-          
-          
+
+
         )
       }
-   );
+    );
 
     return (
       <>
