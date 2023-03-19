@@ -6,9 +6,11 @@ class Header extends React.Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand>Gotham Library Book Collections</Navbar.Brand>
-        <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
-        {/* PLACEHOLDER: render a navigation link to the about page */}
+          <Navbar.Brand>Gotham Library Book Collections</Navbar.Brand>
+              <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
+              <NavItem><Link to="/about" className="nav-link">About the Authors</Link></NavItem>
+              {/* PLACEHOLDER: render a navigation link to the about page */}
+
       </Navbar>
     )
   }
