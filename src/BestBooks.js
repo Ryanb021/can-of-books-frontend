@@ -5,6 +5,7 @@ import { Button, Container } from 'react-bootstrap';
 import BookFormModal from './BookFormModal';
 import BookUpdateModal from './BookUpdateModal';
 import './BestBooks.css';
+import { withAuth0 } from "@auth0/auth0-react";
 
 
 class BestBooks extends React.Component {
@@ -76,7 +77,7 @@ class BestBooks extends React.Component {
     }
   }
 
-  // Delet Book function
+  // Delete Book function
   deleteBook = async (id) => {
     try {
       let url = `${process.env.REACT_APP_SERVER}/books/${id}`;
@@ -118,21 +119,35 @@ class BestBooks extends React.Component {
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
   getBooks = async () => {
-    try {
-
-      let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
-
+    //try {
+      //let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
       //let bookData = await axios.get(url);
+      if (this.props.auth.isAuthenticated) {
+        const result = await this.props.auth0.getIdToken();
+        const jwt = result._raw;
+        const configuration = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: '/books',
+          headers: {
+            "Authorization": `Bearer ${jwt}`
 
-      this.setState({
-        books: results.data,
-        noBooks: false,
-
+          }
+        }
+        let results = await axios(configuration);
+        this.setState({
+          books: results.data,
+          noBooks: false,
       })
 
-    } catch (error) {
-      console.log('Ha! Ha! Ha! You Suck!', error.response.data)
-    }
+
+      
+
+      }else  { console.log('getbooks error'); }
+
+    //} catch (error) {
+    //  console.log('Ha! Ha! Ha! You Suck!', error.response.data)
+    //}
 
   }
 
@@ -158,7 +173,7 @@ class BestBooks extends React.Component {
               <Carousel.Caption className="title">
                 <h3>{i.title}</h3>
                 <p className="description">{i.description}</p>
-                <p>Available: {i.status ? 'Yes' : 'No'}</p>
+                
                 <Button className="delete" variant="outline-dark" onClick={() =>
                   this.deleteBooks(i._id)}>Delete This Book</Button>
                 <Button className="update" variant="outline-warning" onClick={() => this.openUpdateModal(i)}>Update Book Information</Button>
@@ -212,6 +227,6 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);
 
 //<p>Available: {i.status ? 'Yes' : 'No'}</p>

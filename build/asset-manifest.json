@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.532f9b95.css",
+    "main.js": "/static/js/main.8559d3d5.js",
+    "static/media/Gotham City.png": "/static/media/Gotham City.4e82e2c38a15cba84d8c.png",
+    "index.html": "/index.html",
+    "main.532f9b95.css.map": "/static/css/main.532f9b95.css.map",
+    "main.8559d3d5.js.map": "/static/js/main.8559d3d5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.532f9b95.css",
+    "static/js/main.8559d3d5.js"
+  ]
+}
