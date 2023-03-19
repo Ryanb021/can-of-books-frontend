@@ -6,7 +6,7 @@ import Welcome from './Welcome';
 class Content extends React.Component {
 
   render() {
-    console.log('it is working');
+    console.log('content page is working');
     return (
       <>
       {this.props.auth0.isAuthenticated ?

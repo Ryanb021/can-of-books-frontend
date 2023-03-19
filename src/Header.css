@@ -1,9 +1,12 @@
-.alert {
-  width: 40%;
+.nav{
+  display: block;
   margin: auto;
-  background-color: transparent;
+
+}
+
+.brand {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 1.5rem;
+  font-size: 3rem;
   color: #fff;
   text-shadow:
     0 0 7px #fff,
@@ -14,4 +17,11 @@
     0 0 92px #0fa,
     0 0 102px #0fa,
     0 0 151px #0fa;
+
+}
+
+.collapse {
+  margin: auto;
+  justify-content: space-between;
+  width: 20%;
 }

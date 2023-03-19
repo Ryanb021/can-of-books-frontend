@@ -122,9 +122,12 @@ class BestBooks extends React.Component {
     //try {
       //let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
       //let bookData = await axios.get(url);
-      if (this.props.auth.isAuthenticated) {
-        const result = await this.props.auth0.getIdToken();
+      if (this.props.auth0.isAuthenticated) {
+        console.log('please work');
+        const result = await this.props.auth0.getIdTokenClaims();
+        console.log('Hello!');
         const jwt = result._raw;
+        console.log(jwt);
         const configuration = {
           method: 'get',
           baseURL: process.env.REACT_APP_SERVER,
@@ -135,6 +138,7 @@ class BestBooks extends React.Component {
           }
         }
         let results = await axios(configuration);
+        console.log(results.data);
         this.setState({
           books: results.data,
           noBooks: false,

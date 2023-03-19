@@ -4,10 +4,10 @@ import './Welcome.css';
 
 class Welcome extends React.Component {
   render() {
-    console.log('it is working');
+    console.log('welcome page is working');
     return (
       <Alert className="alert" variant="danger">
-        Please Log In to Enter Gotham's Collection of Books
+        Log In to Enter Gotham Library
       </Alert>
 
     )
