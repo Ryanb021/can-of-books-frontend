@@ -138,6 +138,7 @@ class BestBooks extends React.Component {
           }
         }
         let results = await axios(configuration);
+        console.log(results.data);
         this.setState({
           books: results.data,
           noBooks: false,

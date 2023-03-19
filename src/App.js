@@ -10,6 +10,7 @@ import './App.css';
 import Profile from './Profile';
 //import Header from './Header';
 //import { withAuth0 } from "@auth0/auth0-react";
+import Content from './Content';
 
 import {
   BrowserRouter as Router,
@@ -24,7 +25,10 @@ class App extends React.Component {
           <Router>
           <Header />
           <Routes>
-            
+            <Route exact path="/" element={
+              <Content />
+            }
+            ></Route>
             <Route
               exact path="/about"
               element={<About />}
