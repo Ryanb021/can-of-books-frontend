@@ -147,18 +147,18 @@ class BestBooks extends React.Component {
 
         return (
           <Carousel.Item key={i._id}>
-           <span>
+           
               <img
                 src='https://w0.peakpx.com/wallpaper/113/52/HD-wallpaper-the-dark-knight-rises.jpg'
                 alt={i.title}
               />
-            </span>
+           
 
             <Container className="caption">
               <Carousel.Caption className="title">
                 <h3>{i.title}</h3>
                 <p className="description">{i.description}</p>
-
+                <p>Available: {i.status ? 'Yes' : 'No'}</p>
                 <Button className="delete" variant="outline-dark" onClick={() =>
                   this.deleteBooks(i._id)}>Delete This Book</Button>
                 <Button className="update" variant="outline-warning" onClick={() => this.openUpdateModal(i)}>Update Book Information</Button>
@@ -214,4 +214,4 @@ class BestBooks extends React.Component {
 
 export default BestBooks;
 
-//<p>Status: {i.status ? 'Available' : 'Not Available? You must be joking!'}</p>
+//<p>Available: {i.status ? 'Yes' : 'No'}</p>

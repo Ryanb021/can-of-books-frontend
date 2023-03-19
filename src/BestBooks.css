@@ -3,23 +3,17 @@
 
 }
 
-
-h2 {
-  color: brown;
-  font-weight: bold;
-  font-size: 500px;
-}
-
 h3 {
   font-family: 'Times New Roman', Times, serif;
   font-weight: bolder;
-  font-size: 3rem;
+  font-size: 50px;
 }
 
 .description {
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
   font-size: 1.5rem;
+  margin-bottom: 30px;
 }
 
 .btn {
@@ -30,9 +24,6 @@ h3 {
   display: block;
 }
 
-.delete{
-  margin-bottom: 10px;
-}
 
 .carousel-caption {
   background-color: rgba(250, 239, 193, 0.8);
@@ -60,7 +51,7 @@ img:hover {
   margin-bottom: 50px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 5rem;
   color: #fff;
   text-shadow:
     0 0 7px #fff,
@@ -74,7 +65,7 @@ img:hover {
 }
 
 .caption {
-  margin-top: 320px;
+  margin-top: 300px;
 }
 
 .title {
