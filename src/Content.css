@@ -1,9 +1,7 @@
-.alert {
-  width: 40%;
-  margin: auto;
+.why {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 1.5rem;
-  background-color: black;
+  font-weight: bold;
+  font-size: 3rem;
   color: #fff;
   text-shadow:
     0 0 7px #fff,
