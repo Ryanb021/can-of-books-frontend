@@ -8,7 +8,7 @@ import './App.css';
 //import LoginButton from './LoginButton';
 //import LogoutButton from './LogOutButton';
 import Profile from './Profile';
-import Content from './Content';
+//import Header from './Header';
 //import { withAuth0 } from "@auth0/auth0-react";
 
 import {
@@ -24,15 +24,6 @@ class App extends React.Component {
           <Router>
           <Header />
           <Routes>
-            <Route
-              exact path="/"
-              element={
-                <Content />
-              
-              }
-            >
-            </Route>
-
             
             <Route
               exact path="/about"
@@ -59,3 +50,11 @@ export default App;
 //handleOpenModal={this.handleOpenModal}
 //showModal={this.state.showModal}
 //handleCloseModal={this.handleCloseModal}
+// <Route
+// exact path="/"
+// element={
+//   <Header />
+
+// }
+// >
+// </Route> 
