@@ -158,7 +158,7 @@ class BestBooks extends React.Component {
               <Carousel.Caption className="title">
                 <h3>{i.title}</h3>
                 <p className="description">{i.description}</p>
-                <p>Available: {i.status ? 'Yes' : 'No'}</p>
+                
                 <Button className="delete" variant="outline-dark" onClick={() =>
                   this.deleteBooks(i._id)}>Delete This Book</Button>
                 <Button className="update" variant="outline-warning" onClick={() => this.openUpdateModal(i)}>Update Book Information</Button>

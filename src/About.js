@@ -1,5 +1,5 @@
+import React from 'react';
 import { Component } from "react";
-//import React from 'react';
 //import { jsx } from 'react/jsx-runtime';
 
 class Profile extends Component {
